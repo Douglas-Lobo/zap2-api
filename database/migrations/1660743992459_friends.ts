@@ -6,9 +6,8 @@ export default class extends BaseSchema {
   public async up() {
     this.schema.createTable(this.tableName, (table) => {
       table.increments('id')
-      table.string('username').notNullable()
-      table.string('email').notNullable()
-      table.string('photo').defaultTo('default')
+      table.integer('user_id').unsigned().references('id').inTable('users').onDelete('CASCADE')
+      table.integer('friend_id').unsigned().references('id').inTable('users').onDelete('CASCADE')
       table.timestamp('created_at', { useTz: true })
       table.timestamp('updated_at', { useTz: true })
     })
